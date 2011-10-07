@@ -1,0 +1,47 @@
+#documentation_tree {
+	float:left;
+	width:150px;
+	font-size:0.9em;
+	margin:-16px 15px 0 -16px;
+	padding:15px;
+	background-color:#fafafa;
+	border:1px solid #DBE0C8;
+}
+#documentation_tree a {
+	text-decoration:none;
+	word-wrap: break-word;
+}
+#documentation_tree > ol > li ol {
+	display:none;
+}
+#documentation_tree li.current > div {
+	font-weight:bold;
+}
+#documentation_tree ol li {
+	margin-left:10px;
+	text-indent:-10px;
+	list-style:none;
+}
+#documentation_tree ol {
+	margin-top:0;
+	margin-bottom:0;
+}
+#documentation_container {
+	float:left;
+	width:786px;
+}
+#documentation_container h3 {
+	font-size:1.5em;
+	border-bottom:1px solid #eee;
+	margin:24px 0 8px;
+}
+#documentation_container h3.section-header {
+	border-top:1px solid #999;
+	margin-top:30px;
+}
+#documentation_container .view-single-page {
+	text-align:right;
+	font-size:0.9em;
+	margin-top:-41px;
+	margin-bottom:22px;
+}

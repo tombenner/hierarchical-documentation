@@ -1,0 +1,1 @@
+<div><?php echo $this->html->documentation_node_link($object); ?></div>

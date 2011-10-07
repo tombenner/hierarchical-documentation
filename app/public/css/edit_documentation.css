@@ -1,0 +1,19 @@
+.wrap form label {
+	display:block;
+}
+#DocumentationNodeContent {
+	width:700px;
+	height:220px;
+}
+#DocumentationNodeTitle {
+	width:300px;
+}
+#DocumentationNodePreviewContainer {
+	display:none;
+}
+#DocumentationNodePreviewResult {
+	background-color:#fff;
+	border:1px solid #eee;
+	padding:10px;
+	width:700px;
+}
