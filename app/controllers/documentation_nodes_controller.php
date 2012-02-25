@@ -1,6 +1,11 @@
 <?php
 
 class DocumentationNodesController extends MvcPublicController {
+
+	var $default_searchable_fields = array(
+		'title',
+		'content'
+	);
 	
 	public function index() {
 		$this->set_tree_objects();

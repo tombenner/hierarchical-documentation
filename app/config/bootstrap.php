@@ -4,6 +4,17 @@ MvcConfiguration::set(array(
 	'Debug' => false
 ));
 
+MvcConfiguration::append(array(
+	'AdminPages' => array(
+		'documentation_nodes' => array(
+			'add',
+			'delete',
+			'edit',
+			'tree'
+		)
+	)
+));
+
 add_action('mvc_admin_init', 'documentation_admin_init', 10, 1);
 
 function documentation_admin_init($args) {

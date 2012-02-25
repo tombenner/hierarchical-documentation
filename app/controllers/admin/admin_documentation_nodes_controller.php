@@ -1,6 +1,15 @@
 <?php
 
 class AdminDocumentationNodesController extends MvcAdminController {
+	
+	var $default_columns = array(
+		'id',
+		'title'
+	);
+	var $default_searchable_fields = array(
+		'title',
+		'content'
+	);
 
 	public function add() {
 		$this->load_helper('Documentation');
