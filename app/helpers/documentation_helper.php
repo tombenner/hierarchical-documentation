@@ -42,8 +42,8 @@ class DocumentationHelper extends MvcHelper {
 				break;
 			case 'link':
 				if (!empty($attributes['id'])) {
-					$object = $this->documentation_node_model->find_by_id($attributes['id']);
-					$result = '<a href="'.mvc_public_url(array('controller' => 'documentation_nodes', 'action' => 'show', 'object' => $object)).'" title="'.esc_attr($text).'">'.$text.'</a>';
+					$object = $this->documentation_node_model->find_by_local_id($attributes['id']);
+					$result = '<a href="'.mvc_public_url(array('object' => $object)).'" title="'.esc_attr($text).'">'.$text.'</a>';
 				}
 				break;
 			default:

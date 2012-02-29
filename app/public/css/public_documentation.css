@@ -45,3 +45,16 @@
 	margin-top:-41px;
 	margin-bottom:22px;
 }
+.documentation-search-form {
+	float:right;
+}
+.documentation-version-list {
+	float:right;
+	text-align:right;
+}
+.documentation-version-list ul li {
+	margin-left:10px;
+	text-indent:-10px;
+	list-style:none;
+	display:inline;
+}

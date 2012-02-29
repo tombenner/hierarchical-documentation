@@ -15,8 +15,39 @@ MvcConfiguration::append(array(
 	)
 ));
 
-add_action('mvc_admin_init', 'documentation_admin_init', 10, 1);
+function current_documentation_version() {
+	global $current_documentation_version;
+	return $current_documentation_version;
+}
 
+function url_documentation_version_name() {
+	global $url_documentation_version;
+	if (isset($url_documentation_version->name)) {
+		return $url_documentation_version->name;
+	}
+	return null;
+}
+
+add_filter('mvc_before_public_url', 'documentation_before_public_url');
+function documentation_before_public_url($options) {
+	if (!empty($options['object'])) {
+		if ($options['object']->__model_name == 'DocumentationNode') {
+			$options['local_id'] = $options['object']->local_id;
+			if (!empty($options['documentation_version_name']) && $options['documentation_version_name'] == '__default__') {
+				unset($options['documentation_version_name']);
+			} else if (empty($options['documentation_version_name'])) {
+				if (is_admin()) {
+					$options['documentation_version_name'] = $options['object']->documentation_version->name;
+				} else {
+					$options['documentation_version_name'] = url_documentation_version_name();
+				}
+			}
+		}
+	}
+	return $options;
+}
+
+add_action('mvc_admin_init', 'documentation_admin_init', 10, 1);
 function documentation_admin_init($args) {
 	extract($args);
 	if ($controller == 'documentation_nodes') {
@@ -31,7 +62,6 @@ function documentation_admin_init($args) {
 }
 
 add_action('mvc_public_init', 'documentation_public_init', 10, 1);
-
 function documentation_public_init($args) {
 	extract($args);
 	if ($controller == 'documentation_nodes') {
@@ -43,7 +73,6 @@ function documentation_public_init($args) {
 }
 
 add_filter('mvc_page_title', 'documentation_page_title');
-
 function documentation_page_title($args) {
 	if ($_SERVER['REQUEST_URI'] == '/') {
 		$args['title'] = 'Home |';

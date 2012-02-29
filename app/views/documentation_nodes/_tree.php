@@ -10,7 +10,7 @@ for($current_index=0; $current_index<count($objects); $current_index++) {
 	if (!is_null($previous_depth) && $previous_depth > $current_depth) {
 		echo str_repeat('</ol></li>', $previous_depth - $current_depth);
 	}
-	echo '<li id="item_'.$current_node->id.'">';
+	echo '<li id="item_'.$current_node->local_id.'">';
 	echo $this->render_view('_tree_item', array('locals' => array('object' => $current_node)));
 	if (!is_null($next_depth) && $next_depth > $current_depth) {
 		echo '<ol>';

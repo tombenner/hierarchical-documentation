@@ -3,7 +3,7 @@
 class AdminDocumentationNodesController extends MvcAdminController {
 	
 	var $default_columns = array(
-		'id',
+		'local_id' => 'ID',
 		'title'
 	);
 	var $default_searchable_fields = array(
@@ -14,7 +14,11 @@ class AdminDocumentationNodesController extends MvcAdminController {
 	public function add() {
 		$this->load_helper('Documentation');
 		$this->set_parents();
-		$this->create_or_save();
+		if (!empty($this->params['data']['DocumentationNode'])) {
+			$this->params['data']['DocumentationNode']['local_id'] = $this->model->next_local_id();
+			$this->params['data']['DocumentationNode']['documentation_version_id'] = $this->model->admin_version_id();
+		}
+		$this->create();
 	}
 
 	public function edit() {
@@ -26,9 +30,16 @@ class AdminDocumentationNodesController extends MvcAdminController {
 		$this->create_or_save();
 	}
 	
+	public function index() {
+		$this->params['conditions']['documentation_version_id'] = $this->model->admin_version_id();
+		$this->set_objects();
+	}
+	
 	public function tree() {
 		wp_enqueue_script('nest-sortable', mvc_js_url('hierarchical-documentation', 'nest_sortable.js'), array('jquery', 'jquery-ui-core', 'jquery-ui-sortable'), null, true);
-		$objects = $this->DocumentationNode->find();
+		$objects = $this->DocumentationNode->find(array(
+			'conditions' => array('documentation_version_id' => $this->model->admin_version_id())
+		));
 		$this->set('objects', $objects);
 	}
 	
@@ -36,12 +47,13 @@ class AdminDocumentationNodesController extends MvcAdminController {
 		if (!empty($_POST['data'])) {
 			foreach($_POST['data'] as $node) {
 				if (!empty($node['item_id']) && $node['item_id'] != 'root') {
-					$this->DocumentationNode->update($node['item_id'], array(
+					$data = array(
 						'parent_id' => $node['parent_id'],
 						'depth' => $node['depth'],
 						'lft' => $node['left'],
 						'rght' => $node['right']
-					));
+					);
+					$this->DocumentationNode->update_all($data, array('conditions' => array('local_id' => $node['item_id'])));
 				}
 			}
 		}

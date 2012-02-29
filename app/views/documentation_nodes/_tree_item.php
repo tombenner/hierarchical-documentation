@@ -1,1 +1,1 @@
-<div><?php echo $this->html->documentation_node_link($object); ?></div>
+<div><?php echo $this->html->object_link($object); ?></div>
