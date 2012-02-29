@@ -6,12 +6,14 @@ class DocumentationSettings extends MvcSettings {
 		'admin_version_id' => array(
 			'type' => 'select',
 			'label' => 'Admin Version',
-			'options_method' => 'get_all_versions'
+			'options_method' => 'get_all_versions',
+			'default' => 1
 		),
 		'public_version_id' => array(
 			'type' => 'select',
 			'label' => 'Public Version',
-			'options_method' => 'get_all_versions'
+			'options_method' => 'get_all_versions',
+			'default' => 1
 		),
 		'show_search_form' => array(
 			'type' => 'checkbox',
