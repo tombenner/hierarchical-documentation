@@ -10,7 +10,11 @@ MvcConfiguration::append(array(
 			'add',
 			'delete',
 			'edit',
-			'tree'
+			'tree',
+			'export' => array(
+				'parent_slug' => 'tools.php',
+				'label' => 'Export Documentation'
+			)
 		)
 	)
 ));
@@ -80,6 +84,23 @@ function documentation_page_title($args) {
 		$args['title'] = str_replace('Documentation Nodes', 'Documentation', $args['title']);
 	}
 	return $args;
+}
+
+add_action('plugins_loaded', 'download_export');
+function download_export() {
+	global $pagenow;
+	if ($pagenow == 'tools.php' &&
+			isset($_GET['page']) && $_GET['page']=='mvc_documentation_nodes-export' &&
+			isset($_GET['action']) && $_GET['action'] == 'mvc_download_documentation_export') {
+		header('Content-Type: text/plain');
+		header('Content-Disposition: attachment; filename="documentation.sql"');
+		global $wpdb;
+		$prefix = $wpdb->prefix;
+		$command = 'mysqldump -u'.DB_USER.' -p'.DB_PASSWORD.' -h'.DB_HOST.' '.DB_NAME.' '.$prefix.'documentation_nodes '.$prefix.'documentation_versions';
+		system($command, $sql);
+		echo $sql;
+		die();
+	}
 }
 
 ?>

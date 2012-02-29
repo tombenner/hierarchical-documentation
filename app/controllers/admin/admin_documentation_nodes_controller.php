@@ -35,6 +35,9 @@ class AdminDocumentationNodesController extends MvcAdminController {
 		$this->set_objects();
 	}
 	
+	public function export() {
+	}
+	
 	public function tree() {
 		wp_enqueue_script('nest-sortable', mvc_js_url('hierarchical-documentation', 'nest_sortable.js'), array('jquery', 'jquery-ui-core', 'jquery-ui-sortable'), null, true);
 		$objects = $this->DocumentationNode->find(array(
