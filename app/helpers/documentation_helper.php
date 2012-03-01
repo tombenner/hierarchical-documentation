@@ -13,7 +13,9 @@ class DocumentationHelper extends MvcHelper {
 	
 	public function parse_documentation_with_id($string, $id) {
 		$node = $this->documentation_node_model->find_by_id($id);
-		$this->node_local_id = $node->local_id;
+		if (!empty($node->local_id)) {
+			$this->node_local_id = $node->local_id;
+		}
 		$string = $this->parse_documentation_string($string);
 		return $string;
 	}
