@@ -54,7 +54,7 @@ $documentation_helper;
 	This will produce:
 </p>
 
-<?php echo $this->documentation->parse_documentation($example_markup); ?>
+<?php echo $this->documentation->parse_documentation_string($example_markup); ?>
 
 <p>
 	If no language is specified, PHP is used by default. Any language that <a href="http://qbnz.com/highlighter/" target="_blank">GeSHi</a> supports is supported.

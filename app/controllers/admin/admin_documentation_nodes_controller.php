@@ -68,7 +68,7 @@ class AdminDocumentationNodesController extends MvcAdminController {
 		if (!empty($_POST['content'])) {
 			$this->load_helper('Documentation');
 			$id = empty($_POST['id']) ? null : $_POST['id'];
-			echo $this->documentation->parse_documentation(stripslashes($_POST['content']), $id);
+			echo $this->documentation->parse_documentation_with_id(stripslashes($_POST['content']), $id);
 		}
 		// To do: add JSON output confirming sucess
 		die();
