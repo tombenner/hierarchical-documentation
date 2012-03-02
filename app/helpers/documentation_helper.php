@@ -6,8 +6,7 @@ class DocumentationHelper extends MvcHelper {
 	private $documentation_node_model = null;
 	
 	public function init() {
-		global $url_documentation_version, $current_documentation_version;
-		$this->version = $url_documentation_version ? $url_documentation_version : $current_documentation_version;
+		$this->version = displayed_documentation_version();
 		$this->documentation_node_model = MvcModelRegistry::get_model('DocumentationNode');
 	}
 	

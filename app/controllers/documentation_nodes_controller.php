@@ -54,7 +54,7 @@ class DocumentationNodesController extends MvcPublicController {
 	
 	public function set_objects() {
 		$this->process_params_for_search();
-		$version = current_documentation_version();
+		$version = displayed_documentation_version();
 		$this->params['conditions']['documentation_version_id'] = $version->id;
 		$collection = $this->model->paginate($this->params);
 		$this->set('objects', $collection['objects']);
@@ -75,11 +75,18 @@ class DocumentationNodesController extends MvcPublicController {
 				return true;
 			}
 		}
-		$version_id = mvc_setting('DocumentationSettings', 'public_version_id');
-		if (empty($version_id)) {
-			$version_id = 1;
+		$version = null;
+		if (!empty($this->params['version_id'])) {
+			$version = $this->DocumentationVersion->find_by_id($this->params['version_id']);
 		}
-		$this->version = $this->DocumentationVersion->find_by_id($version_id);
+		if (empty($version)) {
+			$version_id = mvc_setting('DocumentationSettings', 'public_version_id');
+			if (empty($version_id)) {
+				$version_id = 1;
+			}
+			$version = $this->DocumentationVersion->find_by_id($version_id);
+		}
+		$this->version = $version;
 		$this->set('current_version', $this->version);
 		$current_documentation_version = $this->version;
 	}

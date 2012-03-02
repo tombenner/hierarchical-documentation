@@ -32,6 +32,21 @@ function url_documentation_version_name() {
 	return null;
 }
 
+function displayed_documentation_version() {
+	global $current_documentation_version, $url_documentation_version;
+	if (!empty($url_documentation_version)) {
+		return $url_documentation_version;
+	}
+	if (isset($_GET['version_id'])) {
+		$documentation_version_model = mvc_model('DocumentationVersion');
+		$version = $documentation_version_model->find_by_id($_GET['version_id']);
+		if (!empty($version)) {
+			return $version;
+		}
+	}
+	return $current_documentation_version;
+}
+
 add_filter('mvc_before_public_url', 'documentation_before_public_url');
 function documentation_before_public_url($options) {
 	if (!empty($options['object'])) {
