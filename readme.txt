@@ -3,7 +3,7 @@ Contributors: tombenner
 Tags: documentation, hierarchical, reference, code, codex, tree, markdown, wiki, wpmvc, plugin
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.0
+Stable tag: 1.1
 
 Lets admins create searchable, hierarchically-organized documentation. Supports Markdown and syntax highlighting for code. Requires WP MVC.
 

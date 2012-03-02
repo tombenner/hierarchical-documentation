@@ -4,7 +4,7 @@ Plugin Name: Hierarchical Documentation
 Plugin URI: http://wordpress.org/extend/plugins/hierarchical-documentation/
 Description: Lets admins create searchable, hierarchically-organized documentation. Supports Markdown and syntax highlighting for code. Requires WP MVC.
 Author: Tom Benner
-Version: 1.0
+Version: 1.1
 Author URI: 
 */
 
