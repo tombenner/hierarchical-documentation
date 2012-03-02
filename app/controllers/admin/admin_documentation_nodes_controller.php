@@ -31,8 +31,12 @@ class AdminDocumentationNodesController extends MvcAdminController {
 	}
 	
 	public function index() {
+		$this->init_default_columns();
+		$this->process_params_for_search();
 		$this->params['conditions']['documentation_version_id'] = $this->model->admin_version_id();
-		$this->set_objects();
+		$collection = $this->model->paginate($this->params);
+		$this->set('objects', $collection['objects']);
+		$this->set_pagination($collection);
 	}
 	
 	public function export() {
