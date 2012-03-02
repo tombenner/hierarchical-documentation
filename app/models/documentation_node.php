@@ -11,6 +11,7 @@ class DocumentationNode extends MvcModel {
 		$slug = preg_replace('/[^\w]/', '-', $slug);
 		$slug = preg_replace('/[-]+/', '-', $slug);
 		$slug = strtolower($slug);
+		$slug = trim($slug, '-');
 		$path = 'documentation/';
 		if (!empty($options['documentation_version_name'])) {
 			$path .= $options['documentation_version_name'].'/';
