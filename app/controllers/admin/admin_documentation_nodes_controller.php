@@ -48,6 +48,7 @@ class AdminDocumentationNodesController extends MvcAdminController {
 	
 	public function update_tree() {
 		if (!empty($_POST['data'])) {
+			$documentation_version_id = $this->model->admin_version_id();
 			foreach($_POST['data'] as $node) {
 				if (!empty($node['item_id']) && $node['item_id'] != 'root') {
 					$data = array(
@@ -56,7 +57,10 @@ class AdminDocumentationNodesController extends MvcAdminController {
 						'lft' => $node['left'],
 						'rght' => $node['right']
 					);
-					$this->DocumentationNode->update_all($data, array('conditions' => array('local_id' => $node['item_id'])));
+					$this->DocumentationNode->update_all($data, array('conditions' => array(
+						'local_id' => $node['item_id'],
+						'documentation_version_id' => $documentation_version_id
+					)));
 				}
 			}
 		}
