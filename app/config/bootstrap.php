@@ -56,7 +56,9 @@ function documentation_before_public_url($options) {
 				unset($options['documentation_version_name']);
 			} else if (empty($options['documentation_version_name'])) {
 				if (is_admin()) {
-					$options['documentation_version_name'] = $options['object']->documentation_version->name;
+					if (!empty($options['object']->documentation_version->name)) {
+						$options['documentation_version_name'] = $options['object']->documentation_version->name;
+					}
 				} else {
 					$options['documentation_version_name'] = url_documentation_version_name();
 				}
